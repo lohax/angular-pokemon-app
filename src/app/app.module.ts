@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core'
-import { BrowserModule } from '@angular/platform-browser'
+import { BrowserModule, Title } from '@angular/platform-browser'
 import { AppRoutingModule } from './app-routing.module'
 
 import { AppComponent } from './app.component'
@@ -33,6 +33,7 @@ import { LoginComponent } from './login.component'
     PageNotFoundComponent,
     LoginComponent
   ],
+  providers: [Title],
   bootstrap: [AppComponent]
 })
 

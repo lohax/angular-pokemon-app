@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
+
 import { Router } from '@angular/router';
 
 import { Pokemon } from './pokemon';
@@ -14,14 +16,18 @@ export class ListPokemonComponent implements OnInit {
   private pokemons : Pokemon[];
   private title : string = 'Liste des pokémons';
 
-  constructor(private router: Router, private pokemonsService: PokemonsService) {}
+  constructor(
+    private router: Router, 
+    private pokemonsService: PokemonsService,
+		private titleService: Title
+  ) {}
 
   ngOnInit(): void {
 		this.getPokemons();
 	}
 
 	getPokemons(): void {
-		//this.titleService.setTitle('Liste des pokémons');
+		this.titleService.setTitle('Liste des pokémons');
 		this.pokemonsService.getPokemons()
 			.subscribe(pokemons => this.pokemons = pokemons);
 	}

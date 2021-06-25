@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Pokemon } from './pokemon';
 import { PokemonsService } from './pokemons.service';
@@ -15,7 +16,8 @@ export class DetailPokemonComponent implements OnInit {
     constructor(
         private route: ActivatedRoute, 
         private router: Router, 
-        private pokemonsService: PokemonsService
+        private pokemonsService: PokemonsService,
+        private titleService: Title
     ) {}
   
     ngOnInit(): void {
@@ -24,7 +26,7 @@ export class DetailPokemonComponent implements OnInit {
         this.pokemonsService.getPokemon(id)
             .subscribe(pokemon => {
                 this.pokemon = pokemon;
-                //this.titleService.setTitle(`Informations sur ${pokemon.name}`);
+                this.titleService.setTitle(`Informations sur ${pokemon.name}`);
             });
         // snapshot fait attendre l'appli pour avoir l'id, le + caste en nombre
         // for (let i = 0; i < this.pokemons.length; i++) {

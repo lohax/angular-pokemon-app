@@ -1,17 +1,16 @@
 import { Injectable } from '@angular/core';
 import { Pokemon } from './pokemon';
-import { POKEMONS } from './mock-pokemons';
-
-import { HttpClient, HttpHeaders } from '@angular/common/http'
-import { Observable, of } from 'rxjs'
-import { catchError, map, tap } from 'rxjs/operators'; 
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable, of } from 'rxjs';
+import { catchError, map, tap } from 'rxjs/operators';
   
 @Injectable()
 export class PokemonsService {
 
-  constructor(private http: HttpClient) { }
-  
-  private pokemonsUrl = 'api/pokemons'
+	// le point d’accés à notre API
+	private pokemonsUrl = 'api/pokemons';
+
+	constructor(private http: HttpClient) { }
 
   private log(log: string) {
     console.log(log)
@@ -64,6 +63,19 @@ export class PokemonsService {
 			catchError(this.handleError<Pokemon>('deletePokemon'))
 		);
 	}
+
+		/** POST pokemon */
+		addPokemon(pokemon: Pokemon): Observable<Pokemon> {
+			const httpOptions = {
+				headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+			};
+	
+			return this.http.post<Pokemon>(this.pokemonsUrl, pokemon, httpOptions).pipe(
+				tap((pokemon: Pokemon) => this.log(`added pokemon with id=${pokemon.id}`)),
+				catchError(this.handleError<Pokemon>('addPokemon'))
+			);
+		}
+	
 
   
   // Retourne tous les pokémons
