@@ -1,0 +1,23 @@
+<h1>{{ title }}</h1>
+
+<ul>
+  <li>carapuce</li>
+  <li>bullbizartre</li>
+</ul>
+
+<button (click)="onClick()">Cliquez ici</button>
+
+<input #box type="text" (keyup)="onKey(box.value)">  <!-- # créé une var local sans event -->
+<p>{{ box.value }}</p> <!-- box.value = la valeur de l'input -->
+<p>{{ value }}</p> <!-- value = resulltat de la method -->
+
+<input 
+  #box 
+  type="text"
+  (keyup.enter)="values=box.value" 
+  (blur)="values=box.value"
+>
+  <!-- on enter assigne directement la value a values ou par blur-->
+<p>{{ values }}</p>
+
+<p *ngIf="age  >  18">Ceci est un message pour les majeurs</p> 
